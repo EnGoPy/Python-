@@ -1,0 +1,19 @@
+"""
+Created on Sun May 13 19:17:13 2018
+Program choosing 6 random numbers from 49 available.
+@author: EnGoPy
+"""
+import random
+
+input
+("Click enter to draw 6 random numbers from 1-49 available")
+numbers=[]
+i=0
+while i<=5:
+    a=random.randint(1,49)
+    if a not in numbers:
+        numbers.append(a)
+        i+=1
+    else:
+        pass
+print("Your numbers are:\n" , numbers)  
