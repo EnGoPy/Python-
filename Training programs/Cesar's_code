@@ -1,0 +1,84 @@
+"""
+Created on Wed May 16 18:36:15 2018
+@author: EnGoPy
+This program is to code and encode message according to Cesar's coding system.
+It's not respect lower and upper letter. Every letter going to be lower.
+It's not changing numbers or special digits.
+"""
+    
+def forward_coding(oldText,key):  
+    if key < 0:
+        key=-(abs(key)%26)
+    else:    
+        key = key%26
+    newText=""
+    smallLetters=range(97,123)
+    for i in oldText:
+        if ord(i) in smallLetters:
+            if ord(i)+key > 122:
+                print(ord(i),i)
+                newText=newText + chr((key+ord(i))-26)
+            elif ord(i)+key < 97:
+                newText=newText + chr((ord(i)+key)+26)
+            else:
+                print('else', ord(i),i)
+                newText=newText + chr(ord(i)+key)
+        else:
+            newText=newText + i
+    print("Your coded message is: " , newText)
+        
+
+def reverse_coding(oldText,key):    
+    if key < 0:
+        key=-(abs(key)%26)
+    else:    
+        key = key%26
+    newText=""
+    smallLetters=range(97,123)
+    for i in oldText:
+        if ord(i) in smallLetters:
+            if ord(i)-key < 97:
+                newText=newText + chr((ord(i)-key)+26)
+            elif  ord(i)-key > 122:
+                newText=newText + chr((ord(i)-key)-26)
+            else:
+                newText=newText + chr(ord(i)-key)
+        else:
+            newText=newText + i
+    print("Your coded message is: " , newText)
+    
+    
+
+print(''' Welcome. This program is used to code
+               or encode message using Cesar's coding and
+               value of the key.
+               Every special signs 
+               and numbers will be ignored. ''')
+while True:
+    choose = input(''' 
+                   1. Code
+                   2. Decode\n''')
+    choose=int(choose)
+    if choose == 1 or choose == 2:
+        break
+    else:
+        print("Wrong choose, please choose \'1\' or \'2\'")
+        
+if choose == 1:
+    text=input("Please type here your message...\n")
+    text=text.lower()
+    key=input("Type here key to code\n")
+    key=int(key)       
+    if key < 0 or key > 0:
+        forward_coding(text,key)
+    else:
+        print("You didn't coded anything - key value: 0 ")
+else:
+    text=input("Please type here your coded message...\n")
+    text=text.lower()
+    key=input("What was the key code\n")
+    key=int(key)      
+    if key < 0 or key > 0:
+        reverse_coding(text,key)
+    else:
+        print("You didn't decoded anything - key value: 0 ")
