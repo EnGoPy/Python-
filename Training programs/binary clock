@@ -1,0 +1,51 @@
+"""
+Created on Tue May 29 22:09:39 2018
+Simple program generating local time into binary numbers.
+No GUI, no graphic, just console
+@author: EnGoPy
+"""
+
+import time
+import os
+
+def cls():
+    os.system("clear")
+
+def dividor(X):
+    a=int(X/10)
+    b=X%10
+    return(a,b)
+
+def filler(a):
+    long = len(a)
+    if long!=4:
+        for i in range (long,4):
+            a=a+"0"
+    return(a)
+
+
+def binary(v):
+    w = []
+    if v == 0:
+        return (filler('0'))
+    while v != 1:
+        w.append(str(int(v) % 2))
+        v = int(v / 2)
+    w.append(str(v))
+    bin= ''.join(w)
+    return (filler(bin))
+
+while True:
+    time.sleep(1)
+    cls()
+    h = time.strftime("%H")
+    m = time.strftime("%M")
+    s = time.strftime("%S")
+
+    hd, hc = dividor(int(h))
+    md, mc = dividor(int(m))
+    sd, sc = dividor(int(s))
+    print(hd, hc ,' : ', md , mc ,' : ', sd , sc ,'\n')
+
+    for i in range(0,4):
+        print(binary(hd)[i], binary(hc)[i], '   ', binary(md)[i], binary(mc)[i], '   ', binary(sd)[i], binary(sc)[i])
