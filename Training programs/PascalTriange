@@ -1,0 +1,26 @@
+#Pascal Triangle
+
+lvl = 4
+width = lvl*7
+baseLine=[1]
+
+
+
+def printing(someList):
+    line = ""
+    for m in someList:
+        line+= "%3d  " % (m)
+    print(line.center(width))
+
+
+printing(baseLine)
+for i in range(lvl-1):
+    newLine=[1]
+    position=0
+    while position < len(baseLine)-1:
+        newLine.append(baseLine[position] + baseLine[position+1])
+        position+=1
+    newLine.append(1)
+    baseLine = newLine.copy()
+
+    printing(newLine)
