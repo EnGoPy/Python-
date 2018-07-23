@@ -1,0 +1,42 @@
+## Program was made for private use to download several times the same package of JPG files from website
+## User define range of pictures
+## Pictures is saved in subfolder (where script is saved) with name of current date (if already doesn't exist)
+
+
+from urllib import request
+import time
+import datetime
+import sys
+import os
+
+def localPath(file_path):
+    #using list to cut name of python file and get exactly path where it is saved on hdd
+    a = file_path.split("\\")
+    a.pop((-1))
+    #returning .py file directory
+    return ('\\'.join(a))
+
+def urlTaker(url,i,locAdress):
+    #defining name of pictures + saving them to subfolder with current date
+    name="photo_"+str(i)+".jpg"
+    file_path = locAdress +"\\" + str(datetime.datetime.today().strftime('%Y-%m-%d')) + "\\"
+    if not os.path.exists(file_path):       #checking if folder with current date already exist. If not - it is gonna be created
+        os.makedirs(locAdress +"\\" + str(datetime.datetime.today().strftime('%Y-%m-%d')) + "\\")
+    print(file_path+name)
+    request.urlretrieve(url, file_path + name)
+    print("URL :  " + url  + " saved as "+ name +" picture.")
+
+try:
+    ad = localPath(str(os.path.realpath(__file__)))     #checking hdd directory of .py file
+    #Defining range of pictures
+    for i in range(1,265):
+        c=3-len(str(i))     #every picture in url has got for example 001.jp. / 201.jpg - amount of 0's is put aoutmaticaly
+        imgurl = "http://XXXXXXXXX/gallery/jia_2018/JiA18__"+(c*"0")+str(i)+".jpg" 
+        print(imgurl)
+        urlTaker(imgurl,i,ad)
+        time.sleep(0.5)
+
+except:
+    print("Probably list went out of range at..." + str(i))
+    raw_input("Press enter to EXIT...")
+    sys.exit()
