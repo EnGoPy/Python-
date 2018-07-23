@@ -1,2 +1,2 @@
 # Python-
-First language serious learning.
+Just portion of my trainigs.
